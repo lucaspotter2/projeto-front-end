@@ -1,0 +1,55 @@
+<div class="login-container">
+  <div class="login-card">
+    <h2>Login</h2>
+    
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input 
+          type="email" 
+          id="email" 
+          formControlName="email"
+          class="form-control"
+          [class.error]="email?.invalid && email?.touched"
+        >
+        <div *ngIf="email?.invalid && email?.touched" class="error-message">
+          <span *ngIf="email?.errors?.['required']">Email é obrigatório</span>
+          <span *ngIf="email?.errors?.['email']">Email inválido</span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Senha:</label>
+        <input 
+          type="password" 
+          id="password" 
+          formControlName="password"
+          class="form-control"
+          [class.error]="password?.invalid && password?.touched"
+        >
+        <div *ngIf="password?.invalid && password?.touched" class="error-message">
+          <span *ngIf="password?.errors?.['required']">Senha é obrigatória</span>
+          <span *ngIf="password?.errors?.['minlength']">Senha deve ter pelo menos 6 caracteres</span>
+        </div>
+      </div>
+
+      <div *ngIf="errorMessage" class="error-message">
+        {{ errorMessage }}
+      </div>
+
+      <button 
+        type="submit" 
+        class="btn-primary"
+        [disabled]="loginForm.invalid || isLoading"
+      >
+        <span *ngIf="isLoading">Carregando...</span>
+        <span *ngIf="!isLoading">Entrar</span>
+      </button>
+    </form>
+
+    <p class="register-link">
+      Não tem uma conta? <a routerLink="/register">Registre-se</a>
+    </p>
+  </div>
+</div>
+

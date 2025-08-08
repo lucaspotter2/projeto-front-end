@@ -1,0 +1,134 @@
+<div class="form-container">
+  <div class="form-card">
+    <h2>{{ isEditMode ? 'Editar Cliente' : 'Novo Cliente' }}</h2>
+    
+    <form [formGroup]="clienteForm" (ngSubmit)="onSubmit()">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="nome">Nome *:</label>
+          <input 
+            type="text" 
+            id="nome" 
+            formControlName="nome"
+            class="form-control"
+            [class.error]="nome?.invalid && nome?.touched"
+          >
+          <div *ngIf="nome?.invalid && nome?.touched" class="error-message">
+            <span *ngIf="nome?.errors?.['required']">Nome é obrigatório</span>
+            <span *ngIf="nome?.errors?.['minlength']">Nome deve ter pelo menos 2 caracteres</span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email *:</label>
+          <input 
+            type="email" 
+            id="email" 
+            formControlName="email"
+            class="form-control"
+            [class.error]="email?.invalid && email?.touched"
+          >
+          <div *ngIf="email?.invalid && email?.touched" class="error-message">
+            <span *ngIf="email?.errors?.['required']">Email é obrigatório</span>
+            <span *ngIf="email?.errors?.['email']">Email inválido</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="telefone">Telefone:</label>
+          <input 
+            type="tel" 
+            id="telefone" 
+            formControlName="telefone"
+            class="form-control"
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="cpf">CPF:</label>
+          <input 
+            type="text" 
+            id="cpf" 
+            formControlName="cpf"
+            class="form-control"
+          >
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="endereco">Endereço:</label>
+        <textarea 
+          id="endereco" 
+          formControlName="endereco"
+          class="form-control"
+          rows="3"
+        ></textarea>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="cidade">Cidade:</label>
+          <input 
+            type="text" 
+            id="cidade" 
+            formControlName="cidade"
+            class="form-control"
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="estado">Estado:</label>
+          <input 
+            type="text" 
+            id="estado" 
+            formControlName="estado"
+            class="form-control"
+            maxlength="2"
+            placeholder="Ex: SP"
+            [class.error]="estado?.invalid && estado?.touched"
+          >
+          <div *ngIf="estado?.invalid && estado?.touched" class="error-message">
+            <span *ngIf="estado?.errors?.['maxlength']">Estado deve ter no máximo 2 caracteres</span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="cep">CEP:</label>
+          <input 
+            type="text" 
+            id="cep" 
+            formControlName="cep"
+            class="form-control"
+            placeholder="00000-000"
+          >
+        </div>
+      </div>
+
+      <div *ngIf="errorMessage" class="error-message">
+        {{ errorMessage }}
+      </div>
+
+      <div class="form-actions">
+        <button 
+          type="button" 
+          class="btn-secondary"
+          (click)="cancel()"
+        >
+          Cancelar
+        </button>
+        
+        <button 
+          type="submit" 
+          class="btn-primary"
+          [disabled]="clienteForm.invalid || isLoading"
+        >
+          <span *ngIf="isLoading">Salvando...</span>
+          <span *ngIf="!isLoading">{{ isEditMode ? 'Atualizar' : 'Salvar' }}</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+

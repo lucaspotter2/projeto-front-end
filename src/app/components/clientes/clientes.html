@@ -1,0 +1,51 @@
+<div class="clientes-container">
+  <div class="header">
+    <h2>Clientes</h2>
+    <button class="btn-primary" (click)="addCliente()">
+      Adicionar Cliente
+    </button>
+  </div>
+
+  <div *ngIf="isLoading" class="loading">
+    Carregando clientes...
+  </div>
+
+  <div *ngIf="errorMessage" class="error-message">
+    {{ errorMessage }}
+  </div>
+
+  <div *ngIf="!isLoading && clientes.length === 0" class="no-data">
+    Nenhum cliente encontrado.
+  </div>
+
+  <div *ngIf="!isLoading && clientes.length > 0" class="clientes-table">
+    <table>
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Email</th>
+          <th>Telefone</th>
+          <th>Cidade</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let cliente of clientes">
+          <td>{{ cliente.nome }}</td>
+          <td>{{ cliente.email }}</td>
+          <td>{{ cliente.telefone || '-' }}</td>
+          <td>{{ cliente.cidade || '-' }}</td>
+          <td class="actions">
+            <button class="btn-edit" (click)="editCliente(cliente.id!)">
+              Editar
+            </button>
+            <button class="btn-delete" (click)="deleteCliente(cliente.id!)">
+              Excluir
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+

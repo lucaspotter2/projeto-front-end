@@ -1,0 +1,48 @@
+<div class="dashboard-container">
+  <header class="dashboard-header">
+    <div class="header-content">
+      <h1>Sistema de Gestão</h1>
+      <div class="user-info">
+        <span *ngIf="currentUser">Olá, {{ currentUser.name }}!</span>
+        <button class="btn-logout" (click)="logout()">Sair</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="dashboard-main">
+    <div class="welcome-section">
+      <h2>Bem-vindo ao Sistema</h2>
+      <p>Gerencie seus clientes de forma simples e eficiente.</p>
+    </div>
+
+    <div class="dashboard-cards">
+      <div class="card" (click)="navigateToClientes()">
+        <div class="card-icon">
+          👥
+        </div>
+        <h3>Clientes</h3>
+        <p>Gerencie seus clientes, adicione novos registros e mantenha as informações atualizadas.</p>
+        <button class="card-button">Acessar Clientes</button>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">
+          📊
+        </div>
+        <h3>Relatórios</h3>
+        <p>Visualize estatísticas e relatórios sobre seus clientes e atividades.</p>
+        <button class="card-button" disabled>Em breve</button>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">
+          ⚙️
+        </div>
+        <h3>Configurações</h3>
+        <p>Configure suas preferências e personalize o sistema conforme suas necessidades.</p>
+        <button class="card-button" disabled>Em breve</button>
+      </div>
+    </div>
+  </main>
+</div>
+
